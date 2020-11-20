@@ -3,7 +3,7 @@
  *    @mail    : mchretien@linuxmail.org
  *    @project : ESIREM TP3
  *    @summary : Base class declaration for crypto functions
- *    @version : v1.0
+ *    @version : v1.1
  */
 
 #ifndef ENCRYPT_H
@@ -15,21 +15,20 @@ namespace crypto {
 
 	class Encrypt {
 	public:
+		Encrypt();
 
-	    Encrypt();
+		std::string get_plain() const;
+		std::string get_cipher() const;
 
-	    std::string get_plain() const;
-	    std::string get_cipher() const;
+		bool read(bool isPlain, std::string filename);
+		bool write(bool isPlain, std::string filename);
 
-	    bool read(bool isPlain, std::string filename);
-	    bool write(bool isPlain, std::string filename);
-
-	    std::string encode();
-	    std::string decode();
+		std::string encode();
+		std::string decode();
 
 	protected:
-	    std::string _plain;
-	    std::string _cipher;
+		std::string _plain;
+		std::string _cipher;
 	};
 }
 
