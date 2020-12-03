@@ -3,7 +3,7 @@
  *    @mail    : mchretien@linuxmail.org
  *    @project : ESIREM TP3
  *    @summary : Test application of different cryptographic functions
- *    @version : v0.5
+ *    @version : v0.6
  */
 
 #include <iostream>
@@ -18,6 +18,7 @@ using std::endl;
 #include "vigenere.h"
 
 int main () {
+	// Create crypto objects
 	crypto::Encrypt encrypt;
 	crypto::Caesar caesar(4);
 	crypto::Caesar2 caesar2(4);
@@ -25,6 +26,7 @@ int main () {
 	crypto::Vigenere vigenere1(vigenere1Key);
 	crypto::Vigenere vigenere2("ecologie");
 
+	// Test Encrypt object
 	cout << "### Test de la classe Encrypt ###" << endl;
 
 	cout << "Lecture du fichier test1.txt en texte non chiffré..." << endl;
@@ -69,6 +71,7 @@ int main () {
 
 	cout << endl << endl;
 
+	// Test Caesar object
 	cout << "### Test de la classe Caesar ###" << endl;
 
 	cout << "Lecture du fichier test1.txt en texte non chiffré..." << endl;
@@ -113,6 +116,7 @@ int main () {
 
 	cout << endl << endl;
 
+	// Test Caesar2 object
 	cout << "### Test de la classe Caesar2 ###" << endl;
 
 	cout << "Lecture du fichier test1.txt en texte non chiffré..." << endl;
@@ -157,6 +161,7 @@ int main () {
 
 	cout << endl << endl;
 
+	// Test first Vigenere object
 	cout << "### Test de la classe Vigenere 1 ###" << endl;
 
 	cout << "Lecture du fichier test1.txt en texte non chiffré..." << endl;
@@ -201,6 +206,7 @@ int main () {
 
 	cout << endl << endl;
 
+	// Test second Vigenere object
 	cout << "### Test de la classe Vigenere 2 ###" << endl;
 
 	cout << "Lecture du fichier test1.txt en texte non chiffré..." << endl;

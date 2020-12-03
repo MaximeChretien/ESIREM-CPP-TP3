@@ -3,7 +3,7 @@
  *    @mail    : mchretien@linuxmail.org
  *    @project : ESIREM TP3
  *    @summary : Base class implementation for crypto functions
- *    @version : v1.0
+ *    @version : v1.1
  */
 
 #include "encrypt.h"
@@ -28,6 +28,7 @@ namespace crypto {
 		if (!file)
 			return false;
 
+		// Check if we import decoded or encoded text
 		if (isPlain) {
 			getline(file, _plain);
 		} else {
@@ -45,6 +46,7 @@ namespace crypto {
 		if (!file)
 			return false;
 
+		// Check if we export decoded or encoded text
 		if (isPlain) {
 			file << _plain;
 		} else {
