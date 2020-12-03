@@ -3,7 +3,7 @@
  *    @mail    : mchretien@linuxmail.org
  *    @project : ESIREM TP3
  *    @summary : Test application of different cryptographic functions
- *    @version : v0.3
+ *    @version : v0.4
  */
 
 #include <iostream>
@@ -13,10 +13,12 @@ using std::endl;
 
 #include "encrypt.h"
 #include "caesar.h"
+#include "caesar2.h"
 
 int main () {
 	crypto::Encrypt encrypt;
 	crypto::Caesar caesar(4);
+	crypto::Caesar2 caesar2(4);
 
 	cout << "### Test de la classe Encrypt ###" << endl;
 
@@ -100,6 +102,50 @@ int main () {
 
 	cout << "Ecriture du texte chiffré dans le fichier result2.txt..." << endl;
 	if (!caesar.write(false, "./result2.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+
+	cout << endl << endl;
+
+	cout << "### Test de la classe Caesar2 ###" << endl;
+
+	cout << "Lecture du fichier test1.txt en texte non chiffré..." << endl;
+	if (!caesar2.read(true, "./test1.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+	cout << endl;
+
+	cout << "Affichage de la valeur chargée dans le texte non chiffré : " << caesar2.get_plain() << endl;
+	cout << endl;
+
+	cout << "Cryptage du texte : " << caesar2.encode() << endl;
+	cout << endl;
+
+	cout << "Affichage de la valeur du texte non chiffré : " << caesar2.get_plain() << endl;
+	cout << "Affichage de la valeur du texte chiffré : " << caesar2.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Lecture du fichier test3.txt en texte chiffré..." << endl;
+	if (!caesar2.read(false, "./test4.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+	cout << endl;
+
+	cout << "Affichage de la valeur chargée dans le texte chiffré : " << caesar2.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Décryptage du texte : " << caesar2.decode() << endl;
+	cout << endl;
+
+	cout << "Affichage de la valeur du texte non chiffré : " << caesar2.get_plain() << endl;
+	cout << "Affichage de la valeur du texte chiffré : " << caesar2.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Ecriture du texte chiffré dans le fichier result3.txt..." << endl;
+	if (!caesar2.write(false, "./result3.txt")) {
 		cout << "Erreur à l'ouverture du fichier" << endl;
 		return 1;
 	}
