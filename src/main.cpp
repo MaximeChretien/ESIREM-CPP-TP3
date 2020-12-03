@@ -3,10 +3,11 @@
  *    @mail    : mchretien@linuxmail.org
  *    @project : ESIREM TP3
  *    @summary : Test application of different cryptographic functions
- *    @version : v0.4
+ *    @version : v0.5
  */
 
 #include <iostream>
+#include <vector>
 
 using std::cout;
 using std::endl;
@@ -14,11 +15,15 @@ using std::endl;
 #include "encrypt.h"
 #include "caesar.h"
 #include "caesar2.h"
+#include "vigenere.h"
 
 int main () {
 	crypto::Encrypt encrypt;
 	crypto::Caesar caesar(4);
 	crypto::Caesar2 caesar2(4);
+	std::vector<int> vigenere1Key = {3, 1, 4, 1, 5};
+	crypto::Vigenere vigenere1(vigenere1Key);
+	crypto::Vigenere vigenere2("ecologie");
 
 	cout << "### Test de la classe Encrypt ###" << endl;
 
@@ -127,7 +132,7 @@ int main () {
 	cout << "Affichage de la valeur du texte chiffré : " << caesar2.get_cipher() << endl;
 	cout << endl;
 
-	cout << "Lecture du fichier test3.txt en texte chiffré..." << endl;
+	cout << "Lecture du fichier test4.txt en texte chiffré..." << endl;
 	if (!caesar2.read(false, "./test4.txt")) {
 		cout << "Erreur à l'ouverture du fichier" << endl;
 		return 1;
@@ -146,6 +151,94 @@ int main () {
 
 	cout << "Ecriture du texte chiffré dans le fichier result3.txt..." << endl;
 	if (!caesar2.write(false, "./result3.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+
+	cout << endl << endl;
+
+	cout << "### Test de la classe Vigenere 1 ###" << endl;
+
+	cout << "Lecture du fichier test1.txt en texte non chiffré..." << endl;
+	if (!vigenere1.read(true, "./test1.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+	cout << endl;
+
+	cout << "Affichage de la valeur chargée dans le texte non chiffré : " << vigenere1.get_plain() << endl;
+	cout << endl;
+
+	cout << "Cryptage du texte : " << vigenere1.encode() << endl;
+	cout << endl;
+
+	cout << "Affichage de la valeur du texte non chiffré : " << vigenere1.get_plain() << endl;
+	cout << "Affichage de la valeur du texte chiffré : " << vigenere1.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Lecture du fichier test5.txt en texte chiffré..." << endl;
+	if (!vigenere1.read(false, "./test5.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+	cout << endl;
+
+	cout << "Affichage de la valeur chargée dans le texte chiffré : " << vigenere1.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Décryptage du texte : " << vigenere1.decode() << endl;
+	cout << endl;
+
+	cout << "Affichage de la valeur du texte non chiffré : " << vigenere1.get_plain() << endl;
+	cout << "Affichage de la valeur du texte chiffré : " << vigenere1.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Ecriture du texte chiffré dans le fichier result4.txt..." << endl;
+	if (!vigenere1.write(false, "./result4.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+
+	cout << endl << endl;
+
+	cout << "### Test de la classe Vigenere 2 ###" << endl;
+
+	cout << "Lecture du fichier test1.txt en texte non chiffré..." << endl;
+	if (!vigenere2.read(true, "./test1.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+	cout << endl;
+
+	cout << "Affichage de la valeur chargée dans le texte non chiffré : " << vigenere2.get_plain() << endl;
+	cout << endl;
+
+	cout << "Cryptage du texte : " << vigenere2.encode() << endl;
+	cout << endl;
+
+	cout << "Affichage de la valeur du texte non chiffré : " << vigenere2.get_plain() << endl;
+	cout << "Affichage de la valeur du texte chiffré : " << vigenere2.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Lecture du fichier test6.txt en texte chiffré..." << endl;
+	if (!vigenere2.read(false, "./test6.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+	cout << endl;
+
+	cout << "Affichage de la valeur chargée dans le texte chiffré : " << vigenere2.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Décryptage du texte : " << vigenere2.decode() << endl;
+	cout << endl;
+
+	cout << "Affichage de la valeur du texte non chiffré : " << vigenere2.get_plain() << endl;
+	cout << "Affichage de la valeur du texte chiffré : " << vigenere2.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Ecriture du texte chiffré dans le fichier result5.txt..." << endl;
+	if (!vigenere2.write(false, "./result5.txt")) {
 		cout << "Erreur à l'ouverture du fichier" << endl;
 		return 1;
 	}
