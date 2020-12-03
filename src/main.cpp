@@ -3,10 +3,11 @@
  *    @mail    : mchretien@linuxmail.org
  *    @project : ESIREM TP3
  *    @summary : Test application of different cryptographic functions
- *    @version : v0.6
+ *    @version : v1.0
  */
 
 #include <iostream>
+#include <array>
 #include <vector>
 
 using std::cout;
@@ -16,6 +17,7 @@ using std::endl;
 #include "caesar.h"
 #include "caesar2.h"
 #include "vigenere.h"
+#include "enigma.h"
 
 int main () {
 	// Create crypto objects
@@ -25,6 +27,8 @@ int main () {
 	std::vector<int> vigenere1Key = {3, 1, 4, 1, 5};
 	crypto::Vigenere vigenere1(vigenere1Key);
 	crypto::Vigenere vigenere2("ecologie");
+	std::array<char, 26> enigmaKey = {'s', 't', 'f', 'p', 'g', 'o', 'v', 'm', 'd', 'b', 'j', 'c', 'r', 'a', 'e', 'w', 'n', 'z', 'k', 'x', 'l', 'h', 'i', 'u', 'y', 'q'};
+	crypto::Enigma enigma(enigmaKey);
 
 	// Test Encrypt object
 	cout << "### Test de la classe Encrypt ###" << endl;
@@ -245,6 +249,51 @@ int main () {
 
 	cout << "Ecriture du texte chiffré dans le fichier result5.txt..." << endl;
 	if (!vigenere2.write(false, "./result5.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+
+	cout << endl << endl;
+
+	// Test Enigma object
+	cout << "### Test de la classe Enigma ###" << endl;
+
+	cout << "Lecture du fichier test1.txt en texte non chiffré..." << endl;
+	if (!enigma.read(true, "./test1.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+	cout << endl;
+
+	cout << "Affichage de la valeur chargée dans le texte non chiffré : " << enigma.get_plain() << endl;
+	cout << endl;
+
+	cout << "Cryptage du texte : " << enigma.encode() << endl;
+	cout << endl;
+
+	cout << "Affichage de la valeur du texte non chiffré : " << enigma.get_plain() << endl;
+	cout << "Affichage de la valeur du texte chiffré : " << enigma.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Lecture du fichier test7.txt en texte chiffré..." << endl;
+	if (!enigma.read(false, "./test7.txt")) {
+		cout << "Erreur à l'ouverture du fichier" << endl;
+		return 1;
+	}
+	cout << endl;
+
+	cout << "Affichage de la valeur chargée dans le texte chiffré : " << enigma.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Décryptage du texte : " << enigma.decode() << endl;
+	cout << endl;
+
+	cout << "Affichage de la valeur du texte non chiffré : " << enigma.get_plain() << endl;
+	cout << "Affichage de la valeur du texte chiffré : " << enigma.get_cipher() << endl;
+	cout << endl;
+
+	cout << "Ecriture du texte chiffré dans le fichier result6.txt..." << endl;
+	if (!enigma.write(false, "./result6.txt")) {
 		cout << "Erreur à l'ouverture du fichier" << endl;
 		return 1;
 	}
