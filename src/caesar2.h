@@ -3,11 +3,13 @@
  *    @mail    : mchretien@linuxmail.org
  *    @project : ESIREM TP3
  *    @summary : Advanced Caesar crypto class declaration
- *    @version : v1.0
+ *    @version : v1.1
  */
 
 #ifndef CAESAR2_H
 #define CAESAR2_H
+
+#include <string>
 
 #include "encrypt.h"
 
