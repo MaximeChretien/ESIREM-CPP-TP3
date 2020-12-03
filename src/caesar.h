@@ -15,7 +15,7 @@ namespace crypto {
 
 	class Caesar : public Encrypt {
 	public:
-		Caesar(const int key);
+		Caesar(const int key = 3);
 
 		std::string encode();
 		std::string decode();
